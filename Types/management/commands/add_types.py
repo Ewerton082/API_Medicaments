@@ -2,6 +2,7 @@ import csv
 from django.core.management.base import BaseCommand
 from Types.models import TypesModel
 
+
 class Command(BaseCommand):
     help = "Arquivo CSV para salvar varios tipos"
 
@@ -20,11 +21,11 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.WARNING(f'{name} foi cadastrado.'))
 
                     TypesModel.objects.create(name=name, resume=resume)
-                
+
                 self.stdout.write(self.style.SUCCESS("Cadastramos todos tipos"))
-        
+
         except FileNotFoundError:
             return "Não foi passado nenhum arquivo"
-        
-        except  Exception as error:
+
+        except Exception as error:
             return f"Não foi Possivel realizar a importação: {error}"

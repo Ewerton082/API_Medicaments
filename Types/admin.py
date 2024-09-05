@@ -6,4 +6,4 @@ from .models import TypesModel
 @admin.register(TypesModel)
 class AdminTypes(admin.ModelAdmin):
     list_display = ('id', 'name', 'resume')
-    model = TypesModel    
+    model = TypesModel
