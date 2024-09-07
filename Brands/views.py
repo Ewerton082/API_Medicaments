@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from Brands.models import BrandsModel
 from Brands.serializers import BrandSerializer
 from django.http import JsonResponse
+from API.permissions import GlobalPermissions
 
 # Create your views here.
 
@@ -10,13 +11,13 @@ from django.http import JsonResponse
 class ListCreateBrands(ListCreateAPIView):
     queryset = BrandsModel.objects.all()
     serializer_class = BrandSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
 
 class DetailUpdateDeleteBrands(RetrieveUpdateDestroyAPIView):
     queryset = BrandsModel.objects.all()
     serializer_class = BrandSerializer
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
     def delete(self, request, *args, **kwargs):
         instance = self. get_object()

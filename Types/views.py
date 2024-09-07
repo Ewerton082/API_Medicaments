@@ -3,6 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from Types.serializers import TypeSerializer
 from Types.models import TypesModel
 from django.http import JsonResponse
+from API.permissions import GlobalPermissions
+
 
 # Create your views here.
 
@@ -10,13 +12,13 @@ from django.http import JsonResponse
 class ListCreateTypes(generics.ListCreateAPIView):
     serializer_class = TypeSerializer
     queryset = TypesModel.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
 
 class DetailUpdateDeleteTypes(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TypeSerializer
     queryset = TypesModel.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
     def delete(self, request, *args, **kwargs):
         istance = self.get_object()

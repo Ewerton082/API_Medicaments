@@ -3,13 +3,15 @@ from rest_framework.permissions import IsAuthenticated
 from Products.models import ProductsModel
 from Products.serializers import ProductSerializer, ProductSerializerPretty
 from django.http import JsonResponse
+from API.permissions import GlobalPermissions
+
 
 # Create your views here.
 
 
 class ListCreateProducts(ListCreateAPIView):
     queryset = ProductsModel.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
     def get_serializer_class(self):
         if self.request.method == "GET":
@@ -19,7 +21,7 @@ class ListCreateProducts(ListCreateAPIView):
 
 class DetailUpdateDeleteProducts(RetrieveUpdateDestroyAPIView):
     queryset = ProductsModel.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissions)
 
     def get_serializer_class(self):
         if self.request.method == "GET":
