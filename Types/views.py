@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from Types.serializers import TypeSerializer
 from Types.models import TypesModel
 from django.http import JsonResponse
@@ -9,11 +10,13 @@ from django.http import JsonResponse
 class ListCreateTypes(generics.ListCreateAPIView):
     serializer_class = TypeSerializer
     queryset = TypesModel.objects.all()
+    permission_classes = (IsAuthenticated,)
 
 
 class DetailUpdateDeleteTypes(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TypeSerializer
     queryset = TypesModel.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def delete(self, request, *args, **kwargs):
         istance = self.get_object()
